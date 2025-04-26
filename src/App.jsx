@@ -1,10 +1,10 @@
 import './App.css';
 import React from 'react';
-import { useRoutes } from 'react-router-dom'
-import Home from './pages/Home'
-import CreatePost from './pages/CreatePost'
-import EditPost from './pages/EditPost'
-import { Link } from 'react-router-dom'
+import { useRoutes } from 'react-router-dom';
+import Home from './pages/Home';
+import CreatePost from './pages/CreatePost';
+import EditPost from './pages/EditPost';
+import { Link } from 'react-router-dom';
 //import PostDetails from './pages/PostDetails'; 
 
 const App = () => {
