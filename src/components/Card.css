@@ -1,0 +1,104 @@
+.time-posted {
+    font-size: 12px;
+    color: gray;
+  }
+  .card-upvote {
+    margin-top: 10px;
+  }
+  
+  .upvoteBtn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .upvoteBtn:hover {
+    color: #646cff;
+  }
+  
+  .Card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .Card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .card-content h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+  }
+  
+  .card-content .post-time {
+    font-size: 12px;
+    color: #777;
+  }
+  
+  .moreButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  
+  .card-link {
+    text-decoration: none;
+  }
+  
+  .upvote-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  .upvote-button {
+    background-color: #eee;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .upvote-button:hover {
+    background-color: #d1d1d1;
+  }
+  
+  .upvote-button svg {
+    fill: #0079d3;
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Styling for the footer to show upvote count or any additional post info */
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .card-footer .upvote-count {
+    font-size: 14px;
+    color: #0079d3;
+  }
+  

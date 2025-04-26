@@ -1,0 +1,81 @@
+input {
+    margin-top: 10px;
+    width: 100%;
+    height: 45px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+label {
+    font-size: 20px;
+}
+
+textarea {
+    border-radius: 8px;
+    width: 100%;
+    border: 1px solid transparent;
+    font-size: 20px;
+    border-color: black;
+}
+
+input[type=submit] {
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    color:white;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    margin-top: 20px;
+  }
+
+input[type=submit]:hover {
+    border-color: #646cff;
+}
+
+/* Style for the labels (Title and Prompt) */
+.label {
+    color: black; /* Black text color for labels */
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Style for the input and textarea elements */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 2px solid black; /* Black border for input and textarea */
+    border-radius: 5px;
+    font-size: 14px;
+    color: black; /* Black text color for input and textarea */
+    outline: none; /* Remove default outline */
+}
+
+/* Focused state to give a border on focus */
+.input-field:focus {
+    border-color: #4CAF50; /* Green border when focused */
+}
+
+/* Style for the submit button */
+.submit-btn {
+    background-color: #4CAF50; /* Green background for button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    background-color: #45a049; /* Darker green when hovered */
+}

@@ -1,3 +1,4 @@
+// To be used if we add a drop down menu for art constraints mutliple choice
 import React from 'react';
 
 const SelectInput = ({ label, name, value, options, onChange }) => {
