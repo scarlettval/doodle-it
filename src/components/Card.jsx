@@ -20,8 +20,7 @@ const Card = (props) => {
 
         {/* Upvote section */}
         <div className="card-upvote">
-          <p>{props.upvotes} Upvotes</p>
-          <button onClick={props.onUpvote} className="upvoteBtn">⬆️ Upvote</button>
+          <button onClick={props.onUpvote} className="upvoteBtn">   ⬆️ Upvote ({props.upvotes})</button>
         </div>
       </div>
     </div>
