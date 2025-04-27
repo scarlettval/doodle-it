@@ -1,3 +1,4 @@
+// src/components/PostDetails.jsx
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../client';
 import { useParams, Link } from 'react-router-dom';
@@ -9,6 +10,7 @@ const PostDetails = () => {
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
+  const [drawingData, setDrawingData] = useState(null); // Store the drawing image data
 
   const deletePost = async () => {
     const confirmed = window.confirm("Are you sure you want to delete this post?");
@@ -74,18 +76,23 @@ const PostDetails = () => {
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
 
-    if (newComment.trim() === '') return;
+    if (newComment.trim() === '' && !drawingData) return;
 
     const { data, error } = await supabase
       .from('Comments')
       .insert([
-        { post_id: id, text: newComment }
+        {
+          post_id: id,
+          text: newComment,
+          image_data: drawingData || null, // Include the image data if available
+        }
       ]);
 
     if (error) {
       console.error('Error submitting comment:', error);
     } else {
       setNewComment('');
+      setDrawingData(null); // Reset the drawing data after submission
       fetchComments(); // Refresh comments after adding
     }
   };
@@ -121,8 +128,8 @@ const PostDetails = () => {
         <div className="comments-section">
           <h3>Comments</h3>
 
-          <DrawingCanvas postId={post.id} />
-
+          {/* Pass the onSaveDrawing handler to DrawingCanvas */}
+          <DrawingCanvas postId={post.id} onSaveDrawing={setDrawingData} />
 
           {/* New Comment Input */}
           <form onSubmit={handleCommentSubmit} className="comment-form">
@@ -146,6 +153,7 @@ const PostDetails = () => {
               comments.map((comment) => (
                 <div key={comment.id} className="comment">
                   <p>{comment.text}</p>
+                  {comment.image_data && <img src={comment.image_data} alt="Drawing" />}
                   <span className="comment-date">{new Date(comment.created_at).toLocaleString()}</span>
                 </div>
               ))
