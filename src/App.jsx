@@ -6,6 +6,7 @@ import CreatePost from './pages/CreatePost';
 import EditPost from './pages/EditPost';
 import { Link } from 'react-router-dom';
 import DoodleItImage from './Images/DoodleIt.png';
+import PostDetails from './pages/PostDetails'; 
 
 //import PostDetails from './pages/PostDetails'; 
 
@@ -32,10 +33,10 @@ const App = () => {
       element: <CreatePost title="New Challenge" />  // Pass title for CreatePost
     },
   
-    // {
-    //   path: '/post/:id',  
-    //   element: <PostDetails />
-    // }
+    {
+      path: '/post/:id',  
+      element: <PostDetails />
+    }
   ]);
 
   return ( 
@@ -47,7 +48,7 @@ const App = () => {
         <img src={DoodleItImage} alt="Doodle It Logo" className="logo" style={{ transform: 'translateX(-40px)' }} />
         </div>
         <div className="header-right">
-          <Link to="/"><button className="headerBtn">Explore Challenge</button></Link>
+          <Link to="/"><button className="headerBtn">Explore Challenges</button></Link>
           <Link to="/new"><button className="headerBtn">Create Challenge</button></Link>
         </div>
       </header>
