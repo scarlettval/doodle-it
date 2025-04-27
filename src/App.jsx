@@ -21,7 +21,7 @@ const App = () => {
 let element = useRoutes([
   {
     path: "/",
-    element: <Home title="Challenges" />
+    element: <Home title="Explore Page" />
   },
   {
     path:"/edit/:id",
