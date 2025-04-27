@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import './EditPost.css';
 import { supabase } from '../client';
 
-const EditPost = () => {
+const EditPost = ({ title }) => {  // Accept title prop
     const { id } = useParams();
 
     const [post, setPost] = useState({
@@ -36,7 +36,7 @@ const EditPost = () => {
             })
             .eq('id', id);
 
-        window.location = "/";
+        window.location = "/"; // Redirect to home after updating
     };
 
     const deletePost = async (event) => {
@@ -47,7 +47,7 @@ const EditPost = () => {
             .delete()
             .eq('id', id);
 
-        window.location = "/";
+        window.location = "/"; // Redirect to home after deleting
     };
 
     const handleChange = (event) => {
@@ -60,6 +60,9 @@ const EditPost = () => {
 
     return (
         <div>
+            {/* Display the dynamic title */}
+            <h2>{title}</h2>  {/* Display title dynamically */}
+
             <form>
                 <label>Title</label><br />
                 <input type="text" name="title" value={post.title} onChange={handleChange} /><br /><br />
@@ -67,7 +70,7 @@ const EditPost = () => {
                 <label>Prompt</label><br />
                 <textarea name="description" value={post.description} onChange={handleChange} rows="5" cols="50" />
 
-
+                <br />
                 <input type="submit" value="Update" onClick={updatePost} />
                 <button className="deleteButton" onClick={deletePost}>Delete</button>
             </form>
@@ -76,5 +79,3 @@ const EditPost = () => {
 };
 
 export default EditPost;
-
-
