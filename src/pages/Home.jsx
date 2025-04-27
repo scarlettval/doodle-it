@@ -15,6 +15,28 @@ const Home = ({ title }) => {  // Accept title prop
   const [sortBy, setSortBy] = useState('trending');
   const [loading, setLoading] = useState(true);
 
+// Handle upvote
+const handleUpvote = async (id, currentUpvotes) => {
+    try {
+      const { error } = await supabase
+        .from('Posts')
+        .update({ upvotes: currentUpvotes + 1 })
+        .eq('id', id);
+  
+      if (error) throw error;
+  
+      // After successful upvote, update state to re-render
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post.id === id ? { ...post, upvotes: post.upvotes + 1 } : post
+        )
+      );
+    } catch (error) {
+      console.error('Error upvoting post:', error);
+    }
+  };
+  
+
   // Fetch posts from Supabase
   useEffect(() => {
     const fetchPosts = async () => {
@@ -103,6 +125,8 @@ const Home = ({ title }) => {  // Accept title prop
               id={post.id}
               title={post.title}
               created_at={post.created_at}
+              upvotes={post.upvotes}  // pass the upvotes
+              onUpvote={() => handleUpvote(post.id, post.upvotes)}  // pass the click handler
             />
           ))}
         </div>
