@@ -6,7 +6,7 @@ import './Home.css'; // Adjust the path as needed
 const sortOptions = [
   { label: 'Trending', value: 'trending' },
   { label: 'Newest', value: 'newest' },
-  { label: 'Top', value: 'top' },
+  { label: 'Most Upvotes', value: 'top' },
 ];
 
 const Home = ({ title }) => {  // Accept title prop
@@ -106,7 +106,7 @@ const Home = ({ title }) => {  // Accept title prop
 
        {/* Render the dynamic title */}
        <h2 className="text-2xl font-bold text-gray-800">{title}</h2> {/* Display title dynamically */}
-       
+
       {/* Search Bar */}
       <div className="search-bar" style={{ marginBottom: '20px' }}>
         <input

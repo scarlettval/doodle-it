@@ -8,8 +8,10 @@ const PostDetails = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
+  const [filteredComments, setFilteredComments] = useState([]); // For filtered comments
   const [newComment, setNewComment] = useState('');
   const [drawingData, setDrawingData] = useState(null); // Store the drawing image data
+  const [filterImages, setFilterImages] = useState(false); // For toggling the filter
 
   const deletePost = async () => {
     const confirmed = window.confirm("Are you sure you want to delete this post?");
@@ -29,31 +31,25 @@ const PostDetails = () => {
   };
   
   const handleUpvote = async (commentId) => {
-    // Find the comment with the given ID
     const comment = comments.find(c => c.id === commentId);
   
-    // Only allow upvoting if the comment has an image
     if (comment && comment.image_data) {
-      // Update upvotes in the database
       const { error } = await supabase
         .from('Comments')
         .update({ upvotes: comment.upvotes + 1 })
         .eq('id', commentId);
   
-      // If there is an error, log it
       if (error) {
         console.error('Error upvoting comment:', error);
       } else {
-        // Update the state optimistically to reflect the change immediately
-        setComments(prevComments =>
-          prevComments.map(c =>
+        setComments(prevComments => 
+          prevComments.map(c => 
             c.id === commentId ? { ...c, upvotes: c.upvotes + 1 } : c
           )
         );
       }
     }
   };
-  
   
   const fetchPost = async () => {
     const { data, error } = await supabase
@@ -79,16 +75,15 @@ const PostDetails = () => {
     if (error) {
       console.error("Error fetching comments:", error);
     } else {
-      // Ensure each comment has an 'upvotes' property, default to 0 if not set
       const commentsWithUpvotes = data.map(comment => ({
         ...comment,
-        upvotes: comment.upvotes || 0,  // Default to 0 if no upvotes are found
+        upvotes: comment.upvotes || 0,  // Default to 0 if no upvotes
       }));
       setComments(commentsWithUpvotes || []);
+      setFilteredComments(commentsWithUpvotes || []); // Set filtered comments on load
     }
   };
   
-
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
 
@@ -96,23 +91,37 @@ const PostDetails = () => {
 
     const { data, error } = await supabase
       .from('Comments')
-      .insert([
-        {
-          post_id: id,
-          text: newComment,
-          image_data: drawingData || null, // Include the image data if available
-          upvotes: 0 // Initialize upvotes to 0
-        }
-      ]);
+      .insert([{
+        post_id: id,
+        text: newComment,
+        image_data: drawingData || null, // Include the image data if available
+        upvotes: 0 // Initialize upvotes to 0
+      }]);
 
     if (error) {
       console.error('Error submitting comment:', error);
     } else {
       setNewComment('');
-      setDrawingData(null); // Reset the drawing data after submission
-      fetchComments(); // Refresh comments after adding
+      setDrawingData(null); // Reset drawing data
+      fetchComments(); // Refresh comments
     }
   };
+
+  // Toggle the filter for comments with images
+  const toggleFilter = () => {
+    setFilterImages(prevState => !prevState);
+  };
+
+  // Apply the filter when it's toggled
+  useEffect(() => {
+    if (filterImages) {
+      // Only show comments with an image
+      setFilteredComments(comments.filter(comment => comment.image_data));
+    } else {
+      // Show all comments
+      setFilteredComments(comments);
+    }
+  }, [filterImages, comments]);
 
   useEffect(() => {
     fetchPost();
@@ -124,15 +133,13 @@ const PostDetails = () => {
   return (
     <div className="PostDetailsWrapper">
       <div className="PostDetails">
-
-        <h1 className='title-challenge'>{post.title}</h1>
-
+        <h1 className="title-challenge">{post.title}</h1>
         <p>{post.description}</p>
 
-        <button className="upvote-button" onClick={() => handleUpvote(post.id)}>
-          Upvote
+        <button className="upvoteBtn" onClick={() => handleUpvote(post.id)}>
+        ⬆️ Upvote
         </button>
-
+        
         <Link to={`/edit/${post.id}`}>
           <button className="edit-button">Edit Post</button>
         </Link>
@@ -141,14 +148,17 @@ const PostDetails = () => {
           Delete Post
         </button>
 
+        {/* Filter Button */}
+        <button className="filter-button" onClick={toggleFilter}>
+          {filterImages ? 'Show All Comments' : 'Show Only Submissions'}
+        </button>
+
         {/* --- COMMENTS SECTION --- */}
         <div className="comments-section">
           <h3>Comments</h3>
 
-          {/* Pass the onSaveDrawing handler to DrawingCanvas */}
           <DrawingCanvas postId={post.id} onSaveDrawing={setDrawingData} />
 
-          {/* New Comment Input */}
           <form onSubmit={handleCommentSubmit} className="comment-form">
             <input
               type="text"
@@ -162,23 +172,19 @@ const PostDetails = () => {
             </button>
           </form>
 
-          {/* List of comments */}
+          {/* List of filtered comments */}
           <div className="comments-list">
-            {comments.length === 0 ? (
+            {filteredComments.length === 0 ? (
               <p>No comments yet.</p>
             ) : (
-              comments.map((comment) => (
+              filteredComments.map((comment) => (
                 <div key={comment.id} className="comment">
                   <p>{comment.text}</p>
                   {comment.image_data && <img src={comment.image_data} alt="Drawing" />}
                   <span className="comment-date">{new Date(comment.created_at).toLocaleString()}</span>
 
-                  {/* Show Heart Upvote button if there is an image */}
                   {comment.image_data && (
-                    <button 
-                      className="heart-upvote-button"
-                      onClick={() => handleUpvote(comment.id)}
-                    >
+                    <button className="heart-upvote-button" onClick={() => handleUpvote(comment.id)}>
                       ❤️ {comment.upvotes || 0}
                     </button>
                   )}
