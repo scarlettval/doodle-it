@@ -1,95 +1,137 @@
+/* Base font styles */
 .Home {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-  }
-  
-  .navbar {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    padding: 30px;
+    background-color: #f9f9f9;
+}
+
+/* Flexbox utility styles */
+.flex {
+    display: flex;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.mb-6 {
+    margin-bottom: 1.5rem;
+}
+
+/* Text styles for Latest Posts section */
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Sorting options container */
+.sort-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .app-name {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .buttons button {
-    margin-left: 10px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* "Sort by" text */
+.text-sm {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+/* Buttons styling for sort options */
+button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
     cursor: pointer;
-  }
-  
-  .buttons button:hover {
-    background-color: #45a049;
-  }
-  
-  .search-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .search-bar {
-    width: 50%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .cards-container {
+    transition: background-color 0.3s ease, transform 0.2s;
+    border-radius: 0.25rem;
+    border: none;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.bg-blue-600 {
+    background-color: #1976D2;
+    color: white;
+}
+
+.bg-gray-100 {
+    background-color: #f7f7f7;
+    color: #555;
+}
+
+/* Grid layout for posts */
+.grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
   }
   
-  .card {
+
+/* Loading and no posts message styling */
+h2 {
+    font-size: 1.5rem;
+    color: #444;
+}
+
+/* Card styling */
+.card {
     background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-  }
-  
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-  }
-  
-  .card-title {
-    font-size: 18px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Card title */
+.card-title {
+    font-size: 20px;
     font-weight: bold;
-  }
-  
-  .card-date {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Card date */
+.card-date {
     font-size: 14px;
-    color: #666;
+    color: #888;
     margin-top: 5px;
-  }
-  
-  .card-actions {
+}
+
+/* Card actions (e.g., upvote button) */
+.card-actions {
     display: flex;
     justify-content: flex-end;
-    margin-top: 10px;
-  }
-  
-  .upvote-btn {
-    padding: 5px 10px;
-    background-color: #ff9900;
+    margin-top: 15px;
+}
+
+/* Upvote button */
+.upvote-btn {
+    padding: 8px 15px;
+    background-color: #FF9900;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
+    font-weight: 600;
     cursor: pointer;
-  }
-  
-  .upvote-btn:hover {
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.upvote-btn:hover {
     background-color: #e68900;
-  }
-  
+    transform: scale(1.05);
+}

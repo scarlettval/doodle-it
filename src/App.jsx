@@ -38,19 +38,23 @@ const App = () => {
   return ( 
 
 
-    <div className="header">
-       <div className="header-left">
-         <h1>Doodle It</h1>
-      </div>
-
-       <div className="header-right">
-         <Link to="/"><button className="headerBtn">Explore Challenge</button></Link>
-         <Link to="/new"><button className="headerBtn">Create Challenge</button></Link>
-      </div>
-
-      
-      {element}  
+    <div className="App">
+  <header className="header">
+    <div className="header-left">
+      <h1>Doodle It</h1>
     </div>
+    <div className="header-right">
+      <Link to="/"><button className="headerBtn">Explore Challenge</button></Link>
+      <Link to="/new"><button className="headerBtn">Create Challenge</button></Link>
+    </div>
+  </header>
+
+  <main className="main-content">
+    <h2 className="latest-posts-title">Latest Posts</h2>
+    {element}
+  </main>
+</div>
+
 
   );
 }
