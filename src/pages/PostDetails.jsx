@@ -1,4 +1,3 @@
-// src/components/PostDetails.jsx
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../client';
 import { useParams, Link } from 'react-router-dom';
@@ -29,22 +28,33 @@ const PostDetails = () => {
     }
   };
   
-  const handleUpvote = async () => {
-    const { error } = await supabase
-      .from('Posts')
-      .update({ upvotes: post.upvotes + 1 })
-      .eq('id', id);
+  const handleUpvote = async (commentId) => {
+    // Find the comment with the given ID
+    const comment = comments.find(c => c.id === commentId);
   
-    if (error) {
-      console.error('Error upvoting:', error);
-    } else {
-      setPost((prevPost) => ({
-        ...prevPost,
-        upvotes: prevPost.upvotes + 1
-      }));
+    // Only allow upvoting if the comment has an image
+    if (comment && comment.image_data) {
+      // Update upvotes in the database
+      const { error } = await supabase
+        .from('Comments')
+        .update({ upvotes: comment.upvotes + 1 })
+        .eq('id', commentId);
+  
+      // If there is an error, log it
+      if (error) {
+        console.error('Error upvoting comment:', error);
+      } else {
+        // Update the state optimistically to reflect the change immediately
+        setComments(prevComments =>
+          prevComments.map(c =>
+            c.id === commentId ? { ...c, upvotes: c.upvotes + 1 } : c
+          )
+        );
+      }
     }
   };
-
+  
+  
   const fetchPost = async () => {
     const { data, error } = await supabase
       .from('Posts')
@@ -65,13 +75,19 @@ const PostDetails = () => {
       .select()
       .eq('post_id', id)
       .order('created_at', { ascending: true });
-
+  
     if (error) {
       console.error("Error fetching comments:", error);
     } else {
-      setComments(data || []);
+      // Ensure each comment has an 'upvotes' property, default to 0 if not set
+      const commentsWithUpvotes = data.map(comment => ({
+        ...comment,
+        upvotes: comment.upvotes || 0,  // Default to 0 if no upvotes are found
+      }));
+      setComments(commentsWithUpvotes || []);
     }
   };
+  
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
@@ -85,6 +101,7 @@ const PostDetails = () => {
           post_id: id,
           text: newComment,
           image_data: drawingData || null, // Include the image data if available
+          upvotes: 0 // Initialize upvotes to 0
         }
       ]);
 
@@ -112,7 +129,7 @@ const PostDetails = () => {
 
         <p>{post.description}</p>
 
-        <button className="upvote-button" onClick={handleUpvote}>
+        <button className="upvote-button" onClick={() => handleUpvote(post.id)}>
           Upvote
         </button>
 
@@ -155,6 +172,16 @@ const PostDetails = () => {
                   <p>{comment.text}</p>
                   {comment.image_data && <img src={comment.image_data} alt="Drawing" />}
                   <span className="comment-date">{new Date(comment.created_at).toLocaleString()}</span>
+
+                  {/* Show Heart Upvote button if there is an image */}
+                  {comment.image_data && (
+                    <button 
+                      className="heart-upvote-button"
+                      onClick={() => handleUpvote(comment.id)}
+                    >
+                      ❤️ {comment.upvotes || 0}
+                    </button>
+                  )}
                 </div>
               ))
             )}
