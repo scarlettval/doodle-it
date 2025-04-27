@@ -9,7 +9,7 @@ const sortOptions = [
   { label: 'Top', value: 'top' },
 ];
 
-const Home = (props) => {
+const Home = ({ title }) => {  // Accept title prop
   const [posts, setPosts] = useState([]);
   const [sortBy, setSortBy] = useState('trending');
   const [loading, setLoading] = useState(true);
@@ -33,7 +33,7 @@ const Home = (props) => {
     };
 
     fetchPosts();
-  }, [props]);
+  }, []);
 
   // Sorting logic
   const sortedPosts = React.useMemo(() => {
@@ -43,11 +43,9 @@ const Home = (props) => {
           new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         );
       case 'top':
-        // For simplicity, assuming "top" could be based on upvotes, adjust accordingly
         return [...posts].sort((a, b) => b.upvotes - a.upvotes);
       case 'trending':
       default:
-        // Simple trending algorithm considering both recency and upvotes
         return [...posts].sort((a, b) => {
           const aScore = a.upvotes * (1 / Math.max(1, (Date.now() - new Date(a.created_at).getTime()) / 86400000));
           const bScore = b.upvotes * (1 / Math.max(1, (Date.now() - new Date(b.created_at).getTime()) / 86400000));
@@ -58,9 +56,11 @@ const Home = (props) => {
 
   return (
     <div className="Home" style={{ padding: '20px' }}>
+      {/* Render the dynamic title */}
+      <h2 className="text-2xl font-bold text-gray-800">{title}</h2> {/* Display title dynamically */}
+      
       {/* Sorting options */}
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800"></h2>
         <div className="flex items-center space-x-2">
           <span className="text-sm text-gray-500">Sort by:</span>
           <div className="border border-gray-300 rounded-full overflow-hidden">

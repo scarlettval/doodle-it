@@ -21,16 +21,17 @@ const App = () => {
   let element = useRoutes([
     {
       path: "/",
-      element:<Home />
+      element: <Home title="Challenges" />  // Pass title for Home
     },
     {
       path:"/edit/:id",
-      element: <EditPost />
+      element: <EditPost title="Edit Challenge" />  // Pass title for EditPost
     },
     {
       path:"/new",
-      element: <CreatePost />
+      element: <CreatePost title="New Challenge" />  // Pass title for CreatePost
     },
+  
     // {
     //   path: '/post/:id',  
     //   element: <PostDetails />
@@ -41,28 +42,24 @@ const App = () => {
 
 
     <div className="App">
-    <header className="header">
-      <div className="header-left" style={{ fontFamily: 'Finger Paint, sans-serif' }} >
-        
-        {/* IMAGE HERE NEXT TO DOODLE */}
+      <header className="header">
+        <div className="header-left" style={{ fontFamily: 'Finger Paint, sans-serif' }} >
         <img src={DoodleItImage} alt="Doodle It Logo" className="logo" style={{ transform: 'translateX(-40px)' }} />
+        </div>
+        <div className="header-right">
+          <Link to="/"><button className="headerBtn">Explore Challenge</button></Link>
+          <Link to="/new"><button className="headerBtn">Create Challenge</button></Link>
+        </div>
+      </header>
 
+      {/* Add the wrapper for correct spacing */}
+      <div className="main-wrapper">
+        <main className="main-content">
+          {element}  {/* Render the page content based on the current route */}
+        </main>
       </div>
-      <div className="header-right" >
-        <Link to="/"><button className="headerBtn">Explore Challenge</button></Link>
-        <Link to="/new"><button className="headerBtn">Create Challenge</button></Link>
-      </div>
-    </header>
-  
-    {/* 👇 Add a wrapper to correctly space from header */}
-    <div className="main-wrapper">
-      <main className="main-content">
-        <h2 className="latest-posts-title">Challenges</h2>
-        {element}
-      </main>
     </div>
-  </div>
-  
+
 
 
   );

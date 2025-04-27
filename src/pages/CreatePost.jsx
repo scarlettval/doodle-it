@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Use react-router for navigati
 import './CreatePost.css';
 import { supabase } from '../client'; // Assuming supabase is already set up
 
-const CreatePost = () => {
+const CreatePost = ({ title }) => {  // Accept title prop
     // State to manage form inputs
     const [post, setPost] = useState({
         title: "", description: ""
@@ -44,7 +44,10 @@ const CreatePost = () => {
 
     return (
         <div>
-            <form onSubmit={createPost}>  {/* Use onSubmit instead of onClick */}
+            {/* Display the dynamic title */}
+            <h2>{title}</h2>  {/* Display title dynamically */}
+
+            <form onSubmit={createPost}>
                 <label className="label">Title</label><br />
                 <input
                     type="text"
