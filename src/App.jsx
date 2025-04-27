@@ -7,9 +7,7 @@ import CreatePost2 from './pages/CreatePost2';
 import EditPost from './pages/EditPost';
 import { Link } from 'react-router-dom';
 import DoodleItImage from './Images/DoodleIt.png';
-import PostDetailsDrawing from './pages/PostDetailsDrawing'; 
-import PostDetailsForum from './pages/PostDetailsForum'; 
-
+import PostPage from './pages/PostPage';  
 const App = () => {
 
   // const backgroundStyle = {
@@ -19,34 +17,30 @@ const App = () => {
   // };
 
   // Sets up routes
-  let element = useRoutes([
-    {
-      path: "/",
-      element: <Home title="Challenges" />  // Pass title for Home
-    },
-    {
-      path:"/edit/:id",
-      element: <EditPost title="Edit Challenge" />  // Pass title for EditPost
-    },
-    {
-      path:"/new-challenge",
-      element: <CreatePost title="New Challenge" />  // Pass title for CreatePost
-    },
-    {
-      path:"/new-post",
-      element: <CreatePost2 title="New Post" />  // Pass title for CreatePost2
-    },
-  
-    {
-      path: '/post/:id',  
-      element: <PostDetailsDrawing />
-    },
 
-    {
-      path: '/post2/:id',  
-      element: <PostDetailsForum />
-    }
-  ]);
+let element = useRoutes([
+  {
+    path: "/",
+    element: <Home title="Challenges" />
+  },
+  {
+    path:"/edit/:id",
+    element: <EditPost title="Edit Challenge" />
+  },
+  {
+    path:"/new-challenge",
+    element: <CreatePost title="New Challenge" />
+  },
+  {
+    path:"/new-post",
+    element: <CreatePost2 title="New Post" />
+  },
+  {
+    path: '/post/:id',  
+    element: <PostPage />   // <-- NOW we use the smart PostPage
+  }
+]);
+
 
   return ( 
 
