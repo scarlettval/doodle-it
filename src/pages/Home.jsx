@@ -60,7 +60,7 @@ const Home = (props) => {
     <div className="Home" style={{ padding: '20px' }}>
       {/* Sorting options */}
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">Latest Posts</h2>
+        <h2 className="text-2xl font-bold text-gray-800"></h2>
         <div className="flex items-center space-x-2">
           <span className="text-sm text-gray-500">Sort by:</span>
           <div className="border border-gray-300 rounded-full overflow-hidden">

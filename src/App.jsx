@@ -40,10 +40,10 @@ const App = () => {
 
     <div className="App">
     <header className="header">
-      <div className="header-left">
+      <div className="header-left" style={{ fontFamily: 'Finger Paint, sans-serif' }} >
         <h1>Doodle It</h1>
       </div>
-      <div className="header-right">
+      <div className="header-right" style={{ fontFamily: 'Finger Paint, sans-serif' }}>
         <Link to="/"><button className="headerBtn">Explore Challenge</button></Link>
         <Link to="/new"><button className="headerBtn">Create Challenge</button></Link>
       </div>
