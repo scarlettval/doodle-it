@@ -6,6 +6,8 @@ import './PostDetails.css';
 const PostDetails = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState('');
 
   const deletePost = async () => {
     const confirmed = window.confirm("Are you sure you want to delete this post?");
@@ -19,7 +21,7 @@ const PostDetails = () => {
       if (error) {
         console.error('Error deleting post:', error);
       } else {
-        window.location = "/"; // Redirect to home after deleting
+        window.location = "/";
       }
     }
   };
@@ -40,22 +42,56 @@ const PostDetails = () => {
     }
   };
 
+  const fetchPost = async () => {
+    const { data, error } = await supabase
+      .from('Posts')
+      .select()
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error("Error fetching post:", error);
+    } else {
+      setPost(data);
+    }
+  };
+
+  const fetchComments = async () => {
+    const { data, error } = await supabase
+      .from('Comments')
+      .select()
+      .eq('post_id', id)
+      .order('created_at', { ascending: true });
+
+    if (error) {
+      console.error("Error fetching comments:", error);
+    } else {
+      setComments(data || []);
+    }
+  };
+
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+
+    if (newComment.trim() === '') return;
+
+    const { data, error } = await supabase
+      .from('Comments')
+      .insert([
+        { post_id: id, text: newComment }
+      ]);
+
+    if (error) {
+      console.error('Error submitting comment:', error);
+    } else {
+      setNewComment('');
+      fetchComments(); // Refresh comments after adding
+    }
+  };
+
   useEffect(() => {
-    const fetchPost = async () => {
-      const { data, error } = await supabase
-        .from('Posts')
-        .select()
-        .eq('id', id)
-        .single();
-
-      if (error) {
-        console.error("Error fetching post:", error);
-      } else {
-        setPost(data);
-      }
-    };
-
     fetchPost();
+    fetchComments();
   }, [id]);
 
   if (!post) return <h2>Loading...</h2>;
@@ -80,10 +116,41 @@ const PostDetails = () => {
           Delete Post
         </button>
 
+        {/* --- COMMENTS SECTION --- */}
+        <div className="comments-section">
+          <h3>Comments</h3>
+
+          {/* New Comment Input */}
+          <form onSubmit={handleCommentSubmit} className="comment-form">
+            <input
+              type="text"
+              placeholder="Write a comment..."
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              className="comment-input"
+            />
+            <button type="submit" className="submit-comment-button">
+              Post
+            </button>
+          </form>
+
+          {/* List of comments */}
+          <div className="comments-list">
+            {comments.length === 0 ? (
+              <p>No comments yet.</p>
+            ) : (
+              comments.map((comment) => (
+                <div key={comment.id} className="comment">
+                  <p>{comment.text}</p>
+                  <span className="comment-date">{new Date(comment.created_at).toLocaleString()}</span>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
-  
 };
 
 export default PostDetails;
