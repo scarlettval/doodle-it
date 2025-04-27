@@ -103,6 +103,10 @@ const Home = ({ title }) => {  // Accept title prop
       boxShadow: '0 6px 12px rgba(0,0,0,0.15)', // Use camelCase for box-shadow
     }}>
 
+
+       {/* Render the dynamic title */}
+       <h2 className="text-2xl font-bold text-gray-800">{title}</h2> {/* Display title dynamically */}
+       
       {/* Search Bar */}
       <div className="search-bar" style={{ marginBottom: '20px' }}>
         <input
@@ -120,9 +124,6 @@ const Home = ({ title }) => {  // Accept title prop
           }}
         />
       </div>
-
-      {/* Render the dynamic title */}
-      <h2 className="text-2xl font-bold text-gray-800">{title}</h2> {/* Display title dynamically */}
 
       {/* Sorting options */}
       <div className="flex justify-between items-center mb-6">
