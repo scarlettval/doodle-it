@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../client';
 import { useParams, Link } from 'react-router-dom';
 import './PostDetails.css';
+import DrawingCanvas from '../components/DrawingCanvas.jsx';
 
 const PostDetails = () => {
   const { id } = useParams();
@@ -119,6 +120,9 @@ const PostDetails = () => {
         {/* --- COMMENTS SECTION --- */}
         <div className="comments-section">
           <h3>Comments</h3>
+
+          <DrawingCanvas postId={post.id} />
+
 
           {/* New Comment Input */}
           <form onSubmit={handleCommentSubmit} className="comment-form">
