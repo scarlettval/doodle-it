@@ -7,9 +7,8 @@ import CreatePost2 from './pages/CreatePost2';
 import EditPost from './pages/EditPost';
 import { Link } from 'react-router-dom';
 import DoodleItImage from './Images/DoodleIt.png';
-import PostDetails from './pages/PostDetails'; 
-
-//import PostDetails from './pages/PostDetails'; 
+import PostDetailsDrawing from './pages/PostDetailsDrawing'; 
+import PostDetailsForum from './pages/PostDetailsForum'; 
 
 const App = () => {
 
@@ -40,7 +39,12 @@ const App = () => {
   
     {
       path: '/post/:id',  
-      element: <PostDetails />
+      element: <PostDetailsDrawing />
+    },
+
+    {
+      path: '/post2/:id',  
+      element: <PostDetailsForum />
     }
   ]);
 

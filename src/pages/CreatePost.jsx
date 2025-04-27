@@ -22,6 +22,7 @@ const CreatePost = ({ title }) => {  // Accept title prop
             .insert({
                 title: post.title,
                 description: post.description,
+                type: 'challenge', // to differentiate from regular forum post
             })
             .select(); 
 
