@@ -52,7 +52,7 @@ let element = useRoutes([
         </div>
         <div className="header-right">
           <Link to="/"><button className="headerBtn">Explore Page</button></Link>
-          <Link to="/new-post"><button className="headerBtn">Create Post</button></Link>
+          <Link to="/new-post"><button className="headerBtn">Create Forum Post</button></Link>
           <Link to="/new-challenge"><button className="headerBtn">Create Challenge</button></Link>
         </div>
       </header>

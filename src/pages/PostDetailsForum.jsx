@@ -114,6 +114,10 @@ const PostDetailsForum = () => {
         <h1 className="title-challenge">{post.title}</h1>
         <p>{post.description}</p>
 
+        <button className="upvoteBtn" onClick={() => handleUpvote(post.id)}>
+        ⬆️ Upvote
+        </button>
+
         <Link to={`/edit/${post.id}`}>
           <button className="edit-button">Edit Post</button>
         </Link>

@@ -6,7 +6,7 @@ import './Home.css';
 const Home = ({ title }) => {
   const [posts, setPosts] = useState([]);
   const [sortBy, setSortBy] = useState('trending'); // default sort
-  const [category, setCategory] = useState(''); // no category filter by default
+  const [category, setCategory] = useState('forum'); // no category filter by default
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
 
