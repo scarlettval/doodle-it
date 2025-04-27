@@ -24,7 +24,21 @@ const PostDetails = () => {
     }
   };
   
+  const handleUpvote = async () => {
+    const { error } = await supabase
+      .from('Posts')
+      .update({ upvotes: post.upvotes + 1 })
+      .eq('id', id);
   
+    if (error) {
+      console.error('Error upvoting:', error);
+    } else {
+      setPost((prevPost) => ({
+        ...prevPost,
+        upvotes: prevPost.upvotes + 1
+      }));
+    }
+  };
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -49,9 +63,15 @@ const PostDetails = () => {
   return (
     <div className="PostDetailsWrapper">
       <div className="PostDetails">
+
         <h1 className='title-challenge'>{post.title}</h1>
+
         <p>{post.description}</p>
-  
+
+        <button className="upvote-button" onClick={handleUpvote}>
+          Upvote
+        </button>
+
         <Link to={`/edit/${post.id}`}>
           <button className="edit-button">Edit Post</button>
         </Link>

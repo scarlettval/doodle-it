@@ -6,7 +6,7 @@ import { supabase } from '../client'; // Assuming supabase is already set up
 const CreatePost = ({ title }) => {  // Accept title prop
     // State to manage form inputs
     const [post, setPost] = useState({
-        title: "", description: ""
+        title: "", description: "", upvotes: 0
     });
 
     // Use the useNavigate hook for redirecting after successful post creation
