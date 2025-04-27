@@ -15,7 +15,7 @@
   left: 0;
   width: 100%;
   height: 80px;
-  background-color: #14246b;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -80,7 +80,7 @@
 }
 
 .header-left h1 {
-  font-size: 24px;
+  font-size: 40px;
   margin: 0;
 }
 
@@ -102,15 +102,14 @@
 
 /* Blue text styling for "Doodle It" */
 h1 {
-  color: #8a90ff; /* Blue color */
-  font-size: 36px; /* Increase font size */
+  color: #8a90ff; /* Purple color */
 }
 
 /* Latest Posts title */
 .latest-posts-title {
   text-align: center;
   font-size: 2.5rem;
-  color: #14246b;  /*Text of Centered Latest Posts*/
+  color: #14246b;  /*Challenges*/
 }
 
 @media (max-width: 600px) {
