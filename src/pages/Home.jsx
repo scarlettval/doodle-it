@@ -127,7 +127,6 @@ const Home = ({ title }) => {  // Accept title prop
       {/* Sorting options */}
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center space-x-2">
-          <span className="text-sm text-gray-500">Sort by:</span>
           <div className="border border-gray-300 rounded-full overflow-hidden">
             {sortOptions.map((option) => (
               <button
