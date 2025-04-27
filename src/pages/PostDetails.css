@@ -1,19 +1,46 @@
-/* PostDetails.css */
+.PostDetailsWrapper {
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: center; /* center vertically */
+    min-height: 38vh;
+    padding-top: 80px;
+    box-sizing: border-box;
+    padding-left: 620px;  /* <<< add padding to prevent touching screen edges */
+    padding-right: 20px; /* <<< add padding to prevent touching screen edges */
+}
+
+.PostDetails {
+    background-color: #e7e5e5;
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%; /* <<< take all available space inside the padding */
+    max-width: 800px; /* <<< shrink max width for better look */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    text-align: center;
+    box-sizing: border-box;
+}
+
 
 .title-challenge {
-    font-size:50px; /* Adjust the size to whatever you prefer */
-    font-weight: bold; /* Optional, if you want it bold */
-    margin-bottom: 10px; /* Optional, adds some space below the title */
-  }
-  
-  /* You can also adjust other elements here, such as the paragraph or button */
-  .PostDetails p {
-    font-size: 16px; /* Adjust paragraph font size */
-    line-height: 1.5; /* Optional, adjust the line spacing */
-  }
-  
-  button {
-    font-size: 14px; /* Optional, adjusts the button font size */
-    padding: 8px 16px; /* Adjust button padding */
-  }
-  
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.PostDetails p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.edit-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
