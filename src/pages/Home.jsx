@@ -1,74 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../client';  // Ensure this path is correct
-import Card from '../components/Card.jsx';  // Assuming you have a Card component
-import './Home.css'; // Adjust the path as needed
+import { supabase } from '../client';
+import Card from '../components/Card.jsx';
+import './Home.css';
 
-const sortOptions = [
-  { label: 'Trending', value: 'trending' },
-  { label: 'Newest', value: 'newest' },
-  { label: 'Most Upvotes', value: 'top' },
-];
-
-const Home = ({ title }) => {  // Accept title prop
+const Home = ({ title }) => {
   const [posts, setPosts] = useState([]);
-  const [sortBy, setSortBy] = useState('trending');
+  const [sortBy, setSortBy] = useState('trending'); // default sort
+  const [category, setCategory] = useState(''); // no category filter by default
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');  // New state for search query
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // Handle upvote
-  const handleUpvote = async (id, currentUpvotes) => {
+  const fetchPosts = async () => {
     try {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('Posts')
-        .update({ upvotes: currentUpvotes + 1 })
-        .eq('id', id);
+        .select()
+        .order('created_at', { ascending: false });
 
       if (error) throw error;
-
-      // After successful upvote, update state to re-render
-      setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post.id === id ? { ...post, upvotes: post.upvotes + 1 } : post
-        )
-      );
+      setPosts(data || []);
     } catch (error) {
-      console.error('Error upvoting post:', error);
+      console.error('Error fetching posts:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Fetch posts from Supabase
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('Posts')
-          .select()
-          .order('created_at', { ascending: false });
-
-        if (error) throw error;
-        setPosts(data || []);
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchPosts();
   }, []);
 
-  // Sorting logic
+  // Filter and sort posts based on user's selections
   const sortedPosts = React.useMemo(() => {
     let filteredPosts = posts;
 
-    // If there is a search query, filter posts based on title
+    // Apply search filter if any
     if (searchQuery) {
       filteredPosts = posts.filter((post) =>
         post.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
-    // Sorting based on selected option
+    // Filter by category (Forum or Challenge)
+    if (category) {
+      filteredPosts = filteredPosts.filter((post) => post.type === category);
+    }
+
+    // Sorting logic
     switch (sortBy) {
       case 'newest':
         return filteredPosts.sort((a, b) =>
@@ -88,59 +66,67 @@ const Home = ({ title }) => {  // Accept title prop
           return bScore - aScore;
         });
     }
-  }, [posts, sortBy, searchQuery]); // Recalculate when searchQuery changes
+  }, [posts, sortBy, searchQuery, category]);
 
   return (
     <div className="Home" style={{
       transform: 'translateX(300px)',  // Use transform for translation
       textAlign: 'center',
-      backgroundColor: '#e7e5e5', // Use camelCase for background-color
-      borderRadius: '12px', // Use camelCase for border-radius
+      backgroundColor: '#e7e5e5',
+      borderRadius: '12px',
       padding: '60px',
       marginTop: '30px',
       width: '90%',
       maxWidth: '1200px',
-      boxShadow: '0 6px 12px rgba(0,0,0,0.15)', // Use camelCase for box-shadow
+      boxShadow: '0 6px 12px rgba(0,0,0,0.15)',
     }}>
 
-
-       {/* Render the dynamic title */}
-       <h2 className="text-2xl font-bold text-gray-800">{title}</h2> {/* Display title dynamically */}
+      <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
 
       {/* Search Bar */}
       <div className="search-bar" style={{ marginBottom: '20px' }}>
         <input
           type="text"
-          placeholder="  Search for challenge!"
+          placeholder="  Search for posts..."
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}  // Update search query on change
-          style={{
-            padding: '10px',
-            width: '100%',
-            maxWidth: '400px',
-            borderRadius: '100px',
-            border: '1px solid #ccc',
-            marginBottom: '20px',
-          }}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="input-field"
         />
       </div>
 
-      {/* Sorting options */}
-      <div className="flex justify-between items-center mb-6">
-        <div className="flex items-center space-x-2">
-          <div className="border border-gray-300 rounded-full overflow-hidden">
-            {sortOptions.map((option) => (
-              <button
-                key={option.value}
-                className={`px-3 py-1 text-sm ${sortBy === option.value ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'}`}
-                onClick={() => setSortBy(option.value)}
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
+{/* Sorting and Category Buttons */}
+<div className="filters">
+  {/* Sort Buttons */}
+  <div className="flex justify-between items-center mb-6 w-full">
+    {/* Sorting buttons will take available space */}
+    <div className="flex items-center space-x-2">
+      {['trending', 'newest', 'top'].map((option) => (
+        <button
+          key={option}
+          onClick={() => setSortBy(option)}
+          className={`px-3 py-1 text-sm ${sortBy === option ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'}`}
+        >
+          {option.charAt(0).toUpperCase() + option.slice(1)}
+        </button>
+      ))}
+    </div>
+
+    {/* Category Buttons */}
+    <div className="flex items-center space-x-4">
+      {['forum', 'challenge'].map((type) => (
+        <button
+          key={type}
+          onClick={() => setCategory(type)}
+          className={`px-3 py-1 text-sm ${category === type ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'}`}
+        >
+          {type.charAt(0).toUpperCase() + type.slice(1)}
+        </button>
+      ))}
+    </div>
+  </div>
+</div>
+
+
 
       {/* Loading state */}
       {loading ? (
@@ -148,7 +134,6 @@ const Home = ({ title }) => {  // Accept title prop
       ) : posts.length === 0 ? (
         <h2>No posts available 😞</h2>
       ) : (
-        // Render posts in grid layout
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {sortedPosts.map((post) => (
             <Card
@@ -156,8 +141,7 @@ const Home = ({ title }) => {  // Accept title prop
               id={post.id}
               title={post.title}
               created_at={post.created_at}
-              upvotes={post.upvotes}  // pass the upvotes
-              onUpvote={() => handleUpvote(post.id, post.upvotes)}  // pass the click handler
+              upvotes={post.upvotes}
             />
           ))}
         </div>

@@ -15,13 +15,21 @@ const Card = (props) => {
       <div className="card-content">
         <Link to={`/post/${props.id}`} className="card-link">
           <h3>{props.title}</h3>
+          <div className="card-tags">
+          {props.type && (
+            <span className={`post-type-tag ${props.type}`}>
+              {props.type === 'forum' ? 'Forum' : 'Challenge'}
+            </span>
+          )}
+        </div>
         
           
         {/* Upvote section */}
         <div className="card-upvote">
           <p className="upvoteBtn">   Upvote Count: {props.upvotes}</p>
         </div>
-        
+
+
         <p className="time-posted">{new Date(props.created_at).toLocaleString()}</p>
         </Link>
       </div>

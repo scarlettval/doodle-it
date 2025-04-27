@@ -111,3 +111,26 @@
     color: #0079d3;
   }
   
+  .card-tags {
+    margin-bottom: 8px; /* Adjust the margin if necessary */
+  }
+  
+  .post-type-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    background-color: grey;
+    text-transform: uppercase;
+  }
+  
+  .post-type-tag.forum {
+    background-color: #6C63FF; /* Purple */
+  }
+  
+  .post-type-tag.challenge {
+    background-color: #FF6B6B; /* Red */
+  }
+  
