@@ -59,7 +59,17 @@ const EditPost = ({ title }) => {  // Accept title prop
     };
 
     return (
-        <div>
+        <div style={{
+            transform: 'translateX(650px) translateY(60px)',  // Use transform for translation
+            textAlign: 'center',
+            backgroundColor: '#e7e5e5', // Use camelCase for background-color
+            borderRadius: '12px', // Use camelCase for border-radius
+            padding: '60px', // Single padding definition
+            marginTop: '30px',
+            width: '90%',
+            maxWidth: '1200px',
+            boxShadow: '0 6px 12px rgba(0,0,0,0.15)', // Use camelCase for box-shadow
+        }}>
             {/* Display the dynamic title */}
             <h2>{title}</h2>  {/* Display title dynamically */}
 

@@ -34,7 +34,7 @@
 }
 
 /* Gray Card (Main Content) */
-.main-content {
+/* .main-content {
   background-color: #e7e5e5;
   border-radius: 12px;
   padding: 60px;
@@ -43,8 +43,7 @@
   max-width: 1200px;
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
   text-align: center;
-  translate: 300px;
-}
+} */
 
 
 .header-title h2 {

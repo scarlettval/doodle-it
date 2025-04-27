@@ -3,6 +3,7 @@ import { supabase } from '../client';  // Ensure this path is correct
 import Card from '../components/Card.jsx';  // Assuming you have a Card component
 import './Home.css'; // Adjust the path as needed
 
+
 const sortOptions = [
   { label: 'Trending', value: 'trending' },
   { label: 'Newest', value: 'newest' },
@@ -55,7 +56,18 @@ const Home = ({ title }) => {  // Accept title prop
   }, [posts, sortBy]);
 
   return (
-    <div className="Home" style={{ padding: '20px' }}>
+    <div className="Home" style={{
+        transform: 'translateX(300px)',  // Use transform for translation
+        textAlign: 'center',
+        backgroundColor: '#e7e5e5', // Use camelCase for background-color
+        borderRadius: '12px', // Use camelCase for border-radius
+        padding: '60px',
+        marginTop: '30px',
+        width: '90%',
+        maxWidth: '1200px',
+        boxShadow: '0 6px 12px rgba(0,0,0,0.15)', // Use camelCase for box-shadow
+    }}>
+    
       {/* Render the dynamic title */}
       <h2 className="text-2xl font-bold text-gray-800">{title}</h2> {/* Display title dynamically */}
       
