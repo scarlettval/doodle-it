@@ -39,17 +39,6 @@ const EditPost = ({ title }) => {  // Accept title prop
         window.location = "/"; // Redirect to home after updating
     };
 
-    const deletePost = async (event) => {
-        event.preventDefault();
-
-        await supabase
-            .from('Posts')
-            .delete()
-            .eq('id', id);
-
-        window.location = "/"; // Redirect to home after deleting
-    };
-
     const handleChange = (event) => {
         const { name, value } = event.target;
         setPost((prev) => ({
@@ -82,7 +71,6 @@ const EditPost = ({ title }) => {  // Accept title prop
 
                 <br />
                 <input type="submit" value="Update" onClick={updatePost} />
-                <button className="deleteButton" onClick={deletePost}>Delete</button>
             </form>
         </div>
     );
