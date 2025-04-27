@@ -7,6 +7,25 @@ const PostDetails = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
 
+  const deletePost = async () => {
+    const confirmed = window.confirm("Are you sure you want to delete this post?");
+    
+    if (confirmed) {
+      const { error } = await supabase
+        .from('Posts')
+        .delete()
+        .eq('id', id);
+  
+      if (error) {
+        console.error('Error deleting post:', error);
+      } else {
+        window.location = "/"; // Redirect to home after deleting
+      }
+    }
+  };
+  
+  
+
   useEffect(() => {
     const fetchPost = async () => {
       const { data, error } = await supabase
@@ -36,6 +55,11 @@ const PostDetails = () => {
         <Link to={`/edit/${post.id}`}>
           <button className="edit-button">Edit Post</button>
         </Link>
+
+        <button className="delete-button" onClick={deletePost}>
+          Delete Post
+        </button>
+
       </div>
     </div>
   );
