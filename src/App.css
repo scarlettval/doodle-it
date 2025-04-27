@@ -1,42 +1,56 @@
-/* Base styles */
 .App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* full height of screen */
   font-family: 'Avenir', 'Century Gothic', sans-serif;
   font-weight: 100;
   font-size: calc(10px + 2vmin);
   color: rgb(0, 0, 0);
-  background-color: rgba(18, 120, 255, 0.95);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
 }
 
-/* Header styling */
+/* Header */
 .header {
-  position: fixed; /* Make header stay at the top */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 80px; /* consistent height */
+  height: 80px;
   background-color: #14246b;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 40px;  /* 10 is width of ribbon */
+  padding: 10px 40px;
   z-index: 1000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* Move content under header */
+.main-wrapper {
+  margin-top: 80px; /* offset height of header */
+  flex-grow: 1; /* take up remaining vertical space */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Salmon Card (Main Content) */
+.main-content {
+  background-color: #e7e5e5;
+  border-radius: 12px;
+  padding: 60px;
+  margin-top: 30px;
+  width: 90%;
+  max-width: 1200px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  text-align: center;
+  translate: 300px;
+}
+
 
 .header-title h2 {
   margin: 0;
   font-size: 30px;
 }
-
-.header-title h1 {
-  font-size: 36px;
-  color: #ffffff; /* white looks cleaner on dark background */
-}
-
 
 .header-title {
   margin-bottom: 10px;
@@ -61,7 +75,7 @@
 }
 
 .headerBtn:hover {
-  background-color: #646cff;
+  background-color: #8a90ff;
   transform: translateY(-3px);
 }
 
@@ -80,32 +94,22 @@
   font-size: 16px;
   border-radius: 8px;
   border: none;
-  background-color: #1a1a1a;
+  background-color: #000000;
   color: white;
   cursor: pointer;
-}
-
-.headerBtn:hover {
-  background-color: #646cff;
+  translate: -70px;
 }
 
 /* Blue text styling for "Doodle It" */
 h1 {
-  color: #1976D2; /* Blue color */
-}
-
-.main-content {
-  background-color: #f9f9f9; /* soft light gray instead of bright blue */
-  border-radius: 12px;
-  padding: 100px;
-  margin-top: 120px;
+  color: #8a90ff; /* Blue color */
+  font-size: 36px; /* Increase font size */
 }
 
 /* Latest Posts title */
 .latest-posts-title {
   text-align: center;
   font-size: 2.5rem;
-  margin-bottom: 50px;
   color: #14246b;  /*Text of Centered Latest Posts*/
 }
 

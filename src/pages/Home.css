@@ -2,7 +2,7 @@
 .Home {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     padding: 30px;
-    background-color: #f9f9f9;
+    background-color: #3d278a;
 }
 
 /* Flexbox utility styles */
@@ -63,7 +63,7 @@ button:hover {
 }
 
 .bg-gray-100 {
-    background-color: #f7f7f7;
+    background-color: #801515;
     color: #555;
 }
 
