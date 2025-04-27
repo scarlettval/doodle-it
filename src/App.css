@@ -22,16 +22,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
+  padding: 10px 40px;  /* 10 is width of ribbon */
   z-index: 1000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.header-title h1,
 .header-title h2 {
   margin: 0;
   font-size: 30px;
 }
+
+.header-title h1 {
+  font-size: 36px;
+  color: #ffffff; /* white looks cleaner on dark background */
+}
+
 
 .header-title {
   margin-bottom: 10px;
@@ -90,17 +95,29 @@ h1 {
 }
 
 .main-content {
-  margin-top: 120px; /* push content down, so it doesn't hide behind fixed header */
-  padding: 20px;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  background-color: #f9f9f9; /* soft light gray instead of bright blue */
+  border-radius: 12px;
+  padding: 100px;
+  margin-top: 120px;
 }
 
 /* Latest Posts title */
 .latest-posts-title {
   text-align: center;
   font-size: 2.5rem;
-  margin-bottom: 30px;
-  color: #14246b;
+  margin-bottom: 50px;
+  color: #14246b;  /*Text of Centered Latest Posts*/
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-buttons {
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+  }
 }

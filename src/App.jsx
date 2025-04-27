@@ -50,7 +50,7 @@ const App = () => {
   </header>
 
   <main className="main-content">
-    <h2 className="latest-posts-title">Latest Posts</h2>
+    <h2 className="latest-posts-title">Challenges</h2>
     {element}
   </main>
 </div>
