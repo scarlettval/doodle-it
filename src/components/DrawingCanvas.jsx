@@ -1,4 +1,3 @@
-// src/components/DrawingCanvas.jsx
 import React, { useRef, useState } from 'react';
 
 const DrawingCanvas = ({ postId, onSaveDrawing }) => {
@@ -33,6 +32,9 @@ const DrawingCanvas = ({ postId, onSaveDrawing }) => {
     if (onSaveDrawing) {
       onSaveDrawing(imageData);
     }
+
+    // Show confirmation pop-up
+    alert('Your drawing has been saved!');
   };
 
   return (
@@ -57,4 +59,3 @@ const DrawingCanvas = ({ postId, onSaveDrawing }) => {
 };
 
 export default DrawingCanvas;
-
