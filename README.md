@@ -51,20 +51,17 @@ The following **optional** features are implemented:
   - Users can filter posts on home feed: Trendinf, Newest, Most Upvotes
 - [X] Web app displays a loading animation whenever data is being fetched
 
+The following **additional** features are implemented:
+- [X] Users can add likes to comments (does not affect upvote in post, this is separate)
+- [X] User can create 'Challenge' posts
+- [X] Users can draw and submit their drawing on a 'Challenge' post
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
+
 ![Final web102 GIF](https://github.com/user-attachments/assets/6808f7b4-7aab-420f-8ab3-11ba897df675)
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-<!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
 
 ## Notes
 
