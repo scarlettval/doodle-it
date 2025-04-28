@@ -21,7 +21,7 @@ const App = () => {
 let element = useRoutes([
   {
     path: "/",
-    element: <Home title="Explore Page" />
+    element: <Home title="Explore" />
   },
   {
     path:"/edit/:id",
@@ -51,7 +51,7 @@ let element = useRoutes([
         <img src={DoodleItImage} alt="Doodle It Logo" className="logo" style={{ transform: 'translateX(-40px)' }} />
         </div>
         <div className="header-right">
-          <Link to="/"><button className="headerBtn">Explore Page</button></Link>
+          <Link to="/"><button className="headerBtn">Explore</button></Link>
           <Link to="/new-post"><button className="headerBtn">Create Forum Post</button></Link>
           <Link to="/new-challenge"><button className="headerBtn">Create Challenge</button></Link>
         </div>
