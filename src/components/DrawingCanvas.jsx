@@ -34,7 +34,7 @@ const DrawingCanvas = ({ postId, onSaveDrawing }) => {
     }
 
     // Show confirmation pop-up
-    alert('Your drawing has been saved!');
+    alert('Your drawing has been saved! You can Post and/or add a Caption :D');
   };
 
   return (
@@ -50,7 +50,7 @@ const DrawingCanvas = ({ postId, onSaveDrawing }) => {
         onMouseLeave={endDrawing}
       />
       <div>
-        <button onClick={saveDrawing} className="save-drawing-button">
+        <button onClick={saveDrawing} className="save-drawing-button"  style={{ border: '2px solid black', background: 'white'  }}>
           Save Drawing
         </button>
       </div>

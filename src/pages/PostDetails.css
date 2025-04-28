@@ -22,14 +22,14 @@
 
 
 .title-challenge {
-    font-size: 50px;
+    font-size: 45px;
     font-weight: bold;
     margin-bottom: 10px;
     word-wrap: break-word;
 }
 
 .PostDetails p {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.5;
 }
 
@@ -37,7 +37,7 @@
     display: inline-block;
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: blue;
+    background-color: #4f46e5;
     color: white;
     font-size: 16px;
     border: none;
@@ -100,5 +100,11 @@
     color: gray;
     display: block;
     margin-top: 5px;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
   }
   

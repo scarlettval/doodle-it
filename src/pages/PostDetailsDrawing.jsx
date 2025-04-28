@@ -12,6 +12,7 @@ const PostDetailsDrawing = () => {
   const [newComment, setNewComment] = useState('');
   const [drawingData, setDrawingData] = useState(null); // Store the drawing image data
   const [filterImages, setFilterImages] = useState(false); // For toggling the filter
+  const [errorMessage, setErrorMessage] = useState(''); // New error state for showing the message
 
   const deletePost = async () => {
     const confirmed = window.confirm("Are you sure you want to delete this post?");
@@ -29,29 +30,28 @@ const PostDetailsDrawing = () => {
       }
     }
   };
-  
-const handleUpvote = async () => {
+
+  const handleUpvote = async () => {
     if (!post) return;
-  
+
     // Increment the upvotes by 1
     const updatedUpvotes = post.upvotes + 1;
-  
+
     const { error } = await supabase
       .from('Posts')
       .update({ upvotes: updatedUpvotes })
       .eq('id', id);
-  
+
     if (error) {
       console.error('Error upvoting post:', error);
     } else {
-      // Update local state with the new upvotes count
       setPost((prevPost) => ({
         ...prevPost,
         upvotes: updatedUpvotes,
       }));
     }
   };
-  
+
   const fetchPost = async () => {
     const { data, error } = await supabase
       .from('Posts')
@@ -84,29 +84,38 @@ const handleUpvote = async () => {
       setFilteredComments(commentsWithUpvotes || []); // Set filtered comments on load
     }
   };
-  
+
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
 
-    if (newComment.trim() === '' && !drawingData) return;
+    // Check if the canvas is blank (no drawing data)
+    if (!drawingData) {
+      setErrorMessage("You need to doodle before posting");
+      return; // Prevent form submission if no drawing data
+    }
 
+    // Proceed with submission if there's a drawing
     const { data, error } = await supabase
       .from('Comments')
       .insert([{
         post_id: id,
-        text: newComment,
-        image_data: drawingData || null, // Include the image data if available
+        text: newComment, // Optional, text can still be included even if empty
+        image_data: drawingData, // Include the image data for the drawing
         upvotes: 0 // Initialize upvotes to 0
       }]);
 
     if (error) {
       console.error('Error submitting comment:', error);
     } else {
-      setNewComment('');
+      setNewComment(''); // Reset comment input
       setDrawingData(null); // Reset drawing data
+      setErrorMessage(''); // Clear error message after successful submission
       fetchComments(); // Refresh comments
     }
   };
+  
+  // Disable the submit button if no comment or drawing is provided
+  const isSubmitDisabled = !drawingData;
 
   // Toggle the filter for comments with images
   const toggleFilter = () => {
@@ -115,19 +124,17 @@ const handleUpvote = async () => {
 
   // Apply the filter when it's toggled
   useEffect(() => {
-    if (filterImages) {
-      // Only show comments with an image
-      setFilteredComments(comments.filter(comment => comment.image_data));
-    } else {
-      // Show all comments
-      setFilteredComments(comments);
-    }
-  }, [filterImages, comments]);
-
-  useEffect(() => {
     fetchPost();
     fetchComments();
   }, [id]);
+
+  useEffect(() => {
+    if (filterImages) {
+      setFilteredComments(comments.filter(comment => comment.image_data));
+    } else {
+      setFilteredComments(comments);
+    }
+  }, [filterImages, comments]);
 
   if (!post) return <h2>Loading...</h2>;
 
@@ -138,7 +145,7 @@ const handleUpvote = async () => {
         <p>{post.description}</p>
 
         <button className="upvoteBtn" onClick={() => handleUpvote(post.id)}>
-        ⬆️ Upvote ({post.upvotes})
+          ⬆️ Upvote ({post.upvotes})
         </button>
         
         <Link to={`/edit/${post.id}`}>
@@ -152,27 +159,23 @@ const handleUpvote = async () => {
         {/* --- COMMENTS SECTION --- */}
         <div className="comments-section">
           <h3>Comments</h3>
-
           <DrawingCanvas postId={post.id} onSaveDrawing={setDrawingData} />
 
           <form onSubmit={handleCommentSubmit} className="comment-form">
             <input
               type="text"
-              placeholder="Write a comment..."
+              placeholder="Write A Caption..."
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               className="comment-input"
             />
-            <button type="submit" className="submit-comment-button">
+            <button type="submit" className="submit-comment-button" disabled={isSubmitDisabled}>
               Post
             </button>
           </form>
           
-          <div>{/* Filter Button */}
-          <button className="filter-button" onClick={toggleFilter}>
-          {filterImages ? 'Show Comments' : 'Show Only Submissions'}
-        </button>
-        </div>
+          {/* Show error message if no drawing data */}
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         
           {/* List of filtered comments */}
           <div className="comments-list">
