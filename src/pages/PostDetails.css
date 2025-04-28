@@ -85,6 +85,8 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
   }
   
   .comments-list .comment {
