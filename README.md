@@ -2,7 +2,7 @@
 
 Submitted by: **Scarlett Valencia Pulido**
 
-This web app: **Doodle It is a **
+This web app: **'Doodle It' is a website forum where users can create and comment on posts about art in all of its forms. They can upvote posts and like comments. What makes Doodle It special is its Challenges! Users can create doodle challenge posts, where they prompt users to draw their best doodles in Microsoft Paint style. The challenges can also receive upvotes and the submission comments can be liked. User have the option to edit/delete their forum posts and challenge posts. Filters of trending (recent + upvoted), recent, and most upvoted filters as well as a search bar are also available to easily explore users posts and posted challenges**
 
 Time spent: **17** hours spent in total
 
@@ -51,19 +51,17 @@ The following **optional** features are implemented:
   - Users can filter posts on home feed: Trendinf, Newest, Most Upvotes
 - [X] Web app displays a loading animation whenever data is being fetched
 
+The following **additional** features are implemented:
+- [X] Users can add likes to comments (does not affect upvote in post, this is separate)
+- [X] User can create 'Challenge' posts
+- [X] Users can draw and submit their drawing on a 'Challenge' post
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![Final web102 GIF](https://github.com/user-attachments/assets/6808f7b4-7aab-420f-8ab3-11ba897df675)
 
-<!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
 
 ## Notes
 
