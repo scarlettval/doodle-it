@@ -55,6 +55,7 @@ The following **optional** features are implemented:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
+![Final web102 GIF](https://github.com/user-attachments/assets/6808f7b4-7aab-420f-8ab3-11ba897df675)
 
 <img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
