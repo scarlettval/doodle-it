@@ -78,6 +78,7 @@ const Home = ({ title }) => {
       marginTop: '80px',
       width: '100%',
       maxWidth: '1200px',
+      minWidth: '1200px',
       boxShadow: '0 6px 12px rgba(70, 66, 66, 0.15)',
       
     }}>

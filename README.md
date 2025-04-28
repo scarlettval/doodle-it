@@ -6,6 +6,8 @@ This web app: **insert description**
 
 Time spent: **12** hours spent in total
 
+## Link to Website URL: 
+
 ## Required Features
 
 The following **required** functionality is completed:
@@ -43,10 +45,6 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-
-- [ ] Web app implements pseudo-authentication
-  - Users can only edit and delete posts or delete comments by entering the secret key, which is set by the user during post creation
-  - **or** upon launching the web app, the user is assigned a random user ID. It will be associated with all posts and comments that they make and displayed on them
   - For both options, only the original user author of a post can update or delete it
 - [X] Users can add more characterics to their posts
   - User can draw and comment their pixel drawing
