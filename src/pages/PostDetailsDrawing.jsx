@@ -71,7 +71,7 @@ const PostDetailsDrawing = () => {
       .from('Comments')
       .select()
       .eq('post_id', id)
-      .order('created_at', { ascending: true });
+      .order('created_at', { ascending: false });
   
     if (error) {
       console.error("Error fetching comments:", error);
