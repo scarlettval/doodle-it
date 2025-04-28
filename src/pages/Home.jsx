@@ -113,7 +113,7 @@ const Home = ({ title }) => {
 
     {/* Category Buttons */}
     <div className="flex items-center space-x-4">
-      {['forum', 'challenges'].map((type) => (
+      {['forum', 'challenge'].map((type) => (
         <button
           key={type}
           onClick={() => setCategory(type)}
