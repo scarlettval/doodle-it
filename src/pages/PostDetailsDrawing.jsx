@@ -148,12 +148,7 @@ const handleUpvote = async () => {
         <button className="delete-button" onClick={deletePost}>
           Delete Post
         </button>
-
-        {/* Filter Button */}
-        <button className="filter-button" onClick={toggleFilter}>
-          {filterImages ? 'Show Comments' : 'Show Only Submissions'}
-        </button>
-
+  
         {/* --- COMMENTS SECTION --- */}
         <div className="comments-section">
           <h3>Comments</h3>
@@ -172,7 +167,13 @@ const handleUpvote = async () => {
               Post
             </button>
           </form>
-
+          
+          <div>{/* Filter Button */}
+          <button className="filter-button" onClick={toggleFilter}>
+          {filterImages ? 'Show Comments' : 'Show Only Submissions'}
+        </button>
+        </div>
+        
           {/* List of filtered comments */}
           <div className="comments-list">
             {filteredComments.length === 0 ? (

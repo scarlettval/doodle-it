@@ -12,7 +12,7 @@
 .PostDetails {
     background-color: #e7e5e5;
     border-radius: 12px;
-    padding: 40px;
+    padding: 70px;
     width: 100%; /* <<< take all available space inside the padding */
     max-width: 800px; /* <<< shrink max width for better look */
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
