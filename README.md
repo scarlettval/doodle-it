@@ -2,9 +2,9 @@
 
 Submitted by: **Scarlett Valencia Pulido**
 
-This web app: **insert description**
+This web app: **Doodle It is a **
 
-Time spent: **12** hours spent in total
+Time spent: **17** hours spent in total
 
 ## Link to Website URL: 
 
@@ -47,7 +47,7 @@ The following **optional** features are implemented:
 
   - For both options, only the original user author of a post can update or delete it
 - [X] Users can add more characterics to their posts
-  - User can draw and comment their pixel drawing
+  - User can draw and add caption to their pixel drawing, under the Challenge Forum
   - Users can filter posts on home feed: Trendinf, Newest, Most Upvotes
 - [X] Web app displays a loading animation whenever data is being fetched
 

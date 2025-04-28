@@ -52,6 +52,33 @@ const PostDetailsDrawing = () => {
     }
   };
 
+  const handleCommentUpvote = async (commentId) => {
+    const commentToUpdate = comments.find(comment => comment.id === commentId);
+    if (!commentToUpdate) return;
+  
+    // Increment the upvotes for the comment by 1
+    const updatedUpvotes = commentToUpdate.upvotes + 1;
+  
+    const { error } = await supabase
+      .from('Comments')
+      .update({ upvotes: updatedUpvotes })
+      .eq('id', commentId);
+  
+    if (error) {
+      console.error('Error upvoting comment:', error);
+    } else {
+      // Update local state with the new upvotes count for the comment
+      setComments((prevComments) =>
+        prevComments.map((comment) =>
+          comment.id === commentId
+            ? { ...comment, upvotes: updatedUpvotes }
+            : comment
+        )
+      );
+    }
+  };
+  
+
   const fetchPost = async () => {
     const { data, error } = await supabase
       .from('Posts')
@@ -189,8 +216,8 @@ const PostDetailsDrawing = () => {
                   <span className="comment-date">{new Date(comment.created_at).toLocaleString()}</span>
 
                   {comment.image_data && (
-                    <button className="heart-upvote-button" onClick={() => handleUpvote(comment.id)}>
-                      ❤️ {comment.upvotes || 0}
+                    <button className="heart-upvote-button" onClick={() => handleCommentUpvote(comment.id)}>
+                    ❤️ {comment.upvotes || 0}
                     </button>
                   )}
                 </div>

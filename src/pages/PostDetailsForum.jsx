@@ -7,7 +7,6 @@ const PostDetailsForum = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
-  const [filteredComments, setFilteredComments] = useState([]);
   const [newComment, setNewComment] = useState('');
 
   const deletePost = async () => {
@@ -29,7 +28,6 @@ const PostDetailsForum = () => {
   const handleUpvote = async () => {
     if (!post) return;
   
-    // Increment the upvotes by 1
     const updatedUpvotes = post.upvotes + 1;
   
     const { error } = await supabase
@@ -40,14 +38,32 @@ const PostDetailsForum = () => {
     if (error) {
       console.error('Error upvoting post:', error);
     } else {
-      // Update local state with the new upvotes count
       setPost((prevPost) => ({
         ...prevPost,
         upvotes: updatedUpvotes,
       }));
     }
   };
-  
+
+  const handleCommentUpvote = async (commentId) => {
+    const updatedComments = comments.map(comment => {
+      if (comment.id === commentId) {
+        return { ...comment, upvotes: comment.upvotes + 1 };
+      }
+      return comment;
+    });
+
+    setComments(updatedComments); // Instantly update UI
+
+    const { error } = await supabase
+      .from('Comments')
+      .update({ upvotes: updatedComments.find(c => c.id === commentId).upvotes })
+      .eq('id', commentId);
+
+    if (error) {
+      console.error('Error upvoting comment:', error);
+    }
+  };
 
   const fetchPost = async () => {
     const { data, error } = await supabase
@@ -78,16 +94,14 @@ const PostDetailsForum = () => {
         upvotes: comment.upvotes || 0,
       }));
       setComments(commentsWithUpvotes || []);
-      setFilteredComments(commentsWithUpvotes || []);
     }
   };
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-
     if (newComment.trim() === '') return;
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('Comments')
       .insert([{
         post_id: id,
@@ -99,7 +113,7 @@ const PostDetailsForum = () => {
       console.error('Error submitting comment:', error);
     } else {
       setNewComment('');
-      fetchComments();
+      fetchComments(); // Refresh the comment list
     }
   };
 
@@ -116,8 +130,8 @@ const PostDetailsForum = () => {
         <h1 className="title-challenge">{post.title}</h1>
         <p>{post.description}</p>
 
-        <button className="upvoteBtn" onClick={() => handleUpvote(post.id)}>
-        ⬆️ Upvote ({post.upvotes})
+        <button className="upvoteBtn" onClick={handleUpvote}>
+          ⬆️ Upvote ({post.upvotes})
         </button>
 
         <Link to={`/edit/${post.id}`}>
@@ -146,15 +160,18 @@ const PostDetailsForum = () => {
           </form>
 
           <div className="comments-list">
-            {filteredComments.length === 0 ? (
+            {comments.length === 0 ? (
               <p>No comments yet.</p>
             ) : (
-              filteredComments.map((comment) => (
+              comments.map((comment) => (
                 <div key={comment.id} className="comment">
                   <p>{comment.text}</p>
                   <span className="comment-date">{new Date(comment.created_at).toLocaleString()}</span>
-                  <button className="heart-upvote-button" onClick={() => handleUpvote(comment.id)}>
-                    ❤️ {comment.upvotes || 0}
+                  <button
+                    className="heart-upvote-button"
+                    onClick={() => handleCommentUpvote(comment.id)}
+                  >
+                    ❤️ {comment.upvotes}
                   </button>
                 </div>
               ))
