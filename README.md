@@ -2,7 +2,7 @@
 
 Submitted by: **Scarlett Valencia Pulido**
 
-This web app: **Doodle It is a **
+This web app: **'Doodle It' is a website forum where users can create and comment on posts about art in all of its forms. They can upvote posts and like comments. What makes Doodle It special is its Challenges! Users can create doodle challenge posts, where they prompt users to draw their best doodles in Microsoft Paint style. The challenges can also receive upvotes and the submission comments can be liked. User have the option to edit/delete their forum posts and challenge posts. Filters of trending (recent + upvoted), recent, and most upvoted filters as well as a search bar are also available to easily explore users posts and posted challenges**
 
 Time spent: **17** hours spent in total
 
