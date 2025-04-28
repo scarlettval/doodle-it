@@ -85,6 +85,7 @@ const CreatePost = ({ title }) => {  // Accept title prop
                     type="submit"
                     value="Submit"
                     className="submit-btn"
+                    style={{ fontFamily: 'Finger Paint, sans-serif' }}
                 />
             </form>
         </div>

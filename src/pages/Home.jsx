@@ -79,6 +79,7 @@ const Home = ({ title }) => {
       width: '100%',
       maxWidth: '1200px',
       boxShadow: '0 6px 12px rgba(70, 66, 66, 0.15)',
+      
     }}>
 
       <h2 className="text-2xl font-bold text-gray-800">{title}</h2>

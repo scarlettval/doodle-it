@@ -50,10 +50,11 @@ let element = useRoutes([
         <div className="header-left" style={{ fontFamily: 'Finger Paint, sans-serif' }} >
         <img src={DoodleItImage} alt="Doodle It Logo" className="logo" style={{ transform: 'translateX(-40px) scale(.9)' }} />
         </div>
+        <p >by Scarlett Valencia Pulido Z23639334</p>
         <div className="header-right">
-          <Link to="/"><button className="headerBtn">Explore</button></Link>
-          <Link to="/new-post"><button className="headerBtn">Create Forum Post</button></Link>
-          <Link to="/new-challenge"><button className="headerBtn">Create Challenge</button></Link>
+          <Link to="/"><button className="headerBtn" style={{ fontFamily: 'Finger Paint, sans-serif' }}>Explore</button></Link>
+          <Link to="/new-post"><button className="headerBtn" style={{ fontFamily: 'Finger Paint, sans-serif' }}>Create Forum Post</button></Link>
+          <Link to="/new-challenge"><button className="headerBtn" style={{ fontFamily: 'Finger Paint, sans-serif' }}>Create Challenge</button></Link>
         </div>
       </header>
 
