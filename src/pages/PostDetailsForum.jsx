@@ -26,26 +26,28 @@ const PostDetailsForum = () => {
     }
   };
 
-  const handleUpvote = async (commentId) => {
-    const comment = comments.find(c => c.id === commentId);
-
-    if (comment) {
-      const { error } = await supabase
-        .from('Comments')
-        .update({ upvotes: comment.upvotes + 1 })
-        .eq('id', commentId);
-
-      if (error) {
-        console.error('Error upvoting comment:', error);
-      } else {
-        setComments(prevComments =>
-          prevComments.map(c =>
-            c.id === commentId ? { ...c, upvotes: c.upvotes + 1 } : c
-          )
-        );
-      }
+  const handleUpvote = async () => {
+    if (!post) return;
+  
+    // Increment the upvotes by 1
+    const updatedUpvotes = post.upvotes + 1;
+  
+    const { error } = await supabase
+      .from('Posts')
+      .update({ upvotes: updatedUpvotes })
+      .eq('id', id);
+  
+    if (error) {
+      console.error('Error upvoting post:', error);
+    } else {
+      // Update local state with the new upvotes count
+      setPost((prevPost) => ({
+        ...prevPost,
+        upvotes: updatedUpvotes,
+      }));
     }
   };
+  
 
   const fetchPost = async () => {
     const { data, error } = await supabase
@@ -115,7 +117,7 @@ const PostDetailsForum = () => {
         <p>{post.description}</p>
 
         <button className="upvoteBtn" onClick={() => handleUpvote(post.id)}>
-        ⬆️ Upvote
+        ⬆️ Upvote ({post.upvotes})
         </button>
 
         <Link to={`/edit/${post.id}`}>

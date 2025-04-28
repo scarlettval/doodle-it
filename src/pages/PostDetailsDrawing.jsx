@@ -30,24 +30,25 @@ const PostDetailsDrawing = () => {
     }
   };
   
-  const handleUpvote = async (commentId) => {
-    const comment = comments.find(c => c.id === commentId);
+const handleUpvote = async () => {
+    if (!post) return;
   
-    if (comment && comment.image_data) {
-      const { error } = await supabase
-        .from('Comments')
-        .update({ upvotes: comment.upvotes + 1 })
-        .eq('id', commentId);
+    // Increment the upvotes by 1
+    const updatedUpvotes = post.upvotes + 1;
   
-      if (error) {
-        console.error('Error upvoting comment:', error);
-      } else {
-        setComments(prevComments => 
-          prevComments.map(c => 
-            c.id === commentId ? { ...c, upvotes: c.upvotes + 1 } : c
-          )
-        );
-      }
+    const { error } = await supabase
+      .from('Posts')
+      .update({ upvotes: updatedUpvotes })
+      .eq('id', id);
+  
+    if (error) {
+      console.error('Error upvoting post:', error);
+    } else {
+      // Update local state with the new upvotes count
+      setPost((prevPost) => ({
+        ...prevPost,
+        upvotes: updatedUpvotes,
+      }));
     }
   };
   
@@ -137,7 +138,7 @@ const PostDetailsDrawing = () => {
         <p>{post.description}</p>
 
         <button className="upvoteBtn" onClick={() => handleUpvote(post.id)}>
-        ⬆️ Upvote
+        ⬆️ Upvote ({post.upvotes})
         </button>
         
         <Link to={`/edit/${post.id}`}>
@@ -150,7 +151,7 @@ const PostDetailsDrawing = () => {
 
         {/* Filter Button */}
         <button className="filter-button" onClick={toggleFilter}>
-          {filterImages ? 'Show All Comments' : 'Show Only Submissions'}
+          {filterImages ? 'Show Comments' : 'Show Only Submissions'}
         </button>
 
         {/* --- COMMENTS SECTION --- */}
