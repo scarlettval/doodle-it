@@ -75,7 +75,7 @@ const Home = ({ title }) => {
       backgroundColor: '#e7e5e5',
       borderRadius: '12px',
       padding: '60px',
-      marginTop: '30px',
+      marginTop: '80px',
       width: '90%',
       maxWidth: '1200px',
       boxShadow: '0 6px 12px rgba(0,0,0,0.15)',

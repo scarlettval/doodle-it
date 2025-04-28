@@ -48,7 +48,7 @@ let element = useRoutes([
     <div className="App">
       <header className="header">
         <div className="header-left" style={{ fontFamily: 'Finger Paint, sans-serif' }} >
-        <img src={DoodleItImage} alt="Doodle It Logo" className="logo" style={{ transform: 'translateX(-40px)' }} />
+        <img src={DoodleItImage} alt="Doodle It Logo" className="logo" style={{ transform: 'translateX(-40px) scale(.9)' }} />
         </div>
         <div className="header-right">
           <Link to="/"><button className="headerBtn">Explore</button></Link>
