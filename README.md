@@ -7,6 +7,9 @@ This web app: **'Doodle It' is a website forum where users can create and commen
 Time spent: **17** hours spent in total
 
 ## Link to Website URL: https://doodle-it-scarlettval.netlify.app/
+Website is still under construction. For the best experience, please use a desktop browser :)
+- content only appears centered for 27in displays
+- login/registration is not configured
 
 ## Required Features
 
